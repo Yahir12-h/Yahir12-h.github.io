@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio</title>
+    <!-- Enlace a Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Enlace a Font Awesome para los íconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Enlace a Prism.js para resaltar código (si aún lo necesitas) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #E6F2E6; /* Verde pastel muy suave */
+            color: #2C4C2C; /* Verde apagado oscuro como los pinos */
+            display: flex;
+        }
+
+        /* Estilo del menú lateral */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            width: 140px;
+            background-color: #2C4C2C;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul li a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background-color: #A3C9A8;
+            color: #2C4C2C;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #5E7C5A;
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .sidebar ul li a i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .content {
+            margin-left: 160px;
+            flex: 1;
+            padding: 20px;
+        }
+
+        /* Estilo de la portada */
+        .hero {
+            height: 100vh;
+            background-image: url('img/pexels-eberhardgross-1367192.jpg'); /* Imagen de fondo de la portada */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero button {
+            padding: 10px 30px;
+            font-size: 1.2rem;
+            border: none;
+            background-color: #A3C9A8;
+            color: #2C4C2C;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #5E7C5A;
+            transform: scale(1.05);
+        }
+
+        /* Estilo de las secciones */
+        .section {
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .section img, .section video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section .btn-link {
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #2C4C2C;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .section:nth-child(odd) {
+            background-color: #DCE7D9;
+        }
+
+        .section:nth-child(even) {
+            background-color: #E6F2E6;
+        }
+
+        /* Estilo para los enlaces de las actividades */
+        .btn-custom {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            background-color: #A3C9A8;
+            color: #2C4C2C;
+            border-radius: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #5E7C5A;
+            color: white;
+            transform: scale(1.05);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Menú lateral -->
+    <aside class="sidebar">
+        <ul>
+            <li>
+                <a href="#actividad1">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Actividad 1</span>
+                </a>
+            </li>
+            <li>
+                <a href="#actividad2">
+                    <i class="fas fa-calculator"></i>
+                    <span>Actividad 2</span>
+                </a>
+            </li>
+            <li>
+                <a href="#actividad3">
+                    <i class="fas fa-palette"></i>
+                    <span>Actividad 3</span>
+                </a>
+            </li>
+            <li>
+                <a href="#actividad4">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Actividad 4</span>
+                </a>
+            </li>
+            <li>
+                <a href="#actividad5">
+                    <i class="fas fa-robot"></i>
+                    <span>Actividad 5</span>
+                </a>
+            </li>
+            <li>
+                <a href="#examen"><i class="fas fa-robot"></i>
+                    <p>EXAMEN</p>
+                </a>
+                
+            </li>
+            
+        </ul>
+    </aside>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        <!-- Sección de portada -->
+        <section class="hero">
+            <div class="container">
+                <h1>¡Bienvenido a Mi Portafolio!</h1>
+                <p>Hola bienvenido a este Portafolio me llamo yahir estudia la univercidad a nivel licenciatura en publicidad y relaciones publicas me gusta mucha la tecnologia y el diseño asi mismo  las actividades que se presentan son de la esperiencia educativa diseño wed </p>
+                <button onclick="window.location.href='#actividad1'">Ver Actividades</button>
+            </div>
+        </section>
+
+        <!-- Secciones de actividades -->
+        <section id="actividad1" class="section">
+            <h2>Actividad 1:  20/ago/2024 </h2>
+            <p>En equipo, hacer una presentación electrónica sobre:</p>
+            <img src="img/ac1.png" alt="Imagen del proyecto de ciencias">
+            <!-- Apartado para enlaces de actividad -->
+            <a href="https://github.com/tuusuario/proyecto-ciencias" class="btn-custom btn-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Código
+            </a>
+        </section>
+
+        <section id="actividad2" class="section">
+            <h2>Actividad 2: 22/ago/2024 </h2>
+            <p>Introducción a HTML. Etiquetas básicas para una página web de diseño tipo blog en HTML5.</p>
+            <img src="img/ac2.png" alt="Imagen del proyecto de matemáticas">
+            <!-- Apartado para enlaces de actividad -->
+            <a href="https://github.com/tuusuario/proyecto-matematicas" class="btn-custom btn-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Código
+            </a>
+        </section>
+
+        <section id="actividad3" class="section">
+            <h2>Actividad 3: 29/ago/2024 </h2>
+            <p>Crear el archivo 'estilo.css' donde se apliquen reglas de estilos a los diferentes selectores del documento  index.html .</p>
+            <img src="img/ac3.png" alt="Imagen de la presentación de arte">
+            <!-- Apartado para enlaces de actividad -->
+            <a href="https://github.com/tuusuario/presentacion-arte" class="btn-custom btn-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Código
+            </a>
+        </section>
+
+        <section id="actividad4" class="section">
+            <h2>Actividad 4: 12/sep/2024 </h2>
+            <p>Crear un sitio web con tema libre de 3 páginas con una homepage y dos páginas secundarias.</p>
+            <img src="img/ac4.png" alt="Imagen del proyecto de desarrollo web">
+            <!-- Apartado para enlaces de actividad -->
+            <a href="https://github.com/tuusuario/desarrollo-web" class="btn-custom btn-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Código
+            </a>
+        </section>
+
+        <section id="actividad5" class="section">
+            <h2>Actividad 5: 17/sep/2024</h2>
+            <p>Usando bootstrap crear el homepage de las diferentes columnas.</p>
+            <img src="img/ac5.png" alt="Imagen del proyecto de robótica">
+            <!-- Apartado para enlaces de actividad -->
+            <a href="https://github.com/tuusuario/proyecto-robotica" class="btn-custom btn-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> Ver Código
+            </a>
+        </section>
+        <section id="examen" class="section">
+            <h2>EXAMEN</h2>
+            <p>Descripción de la actividad 6, muestra una imagen o video de tu proyecto de robótica aquí.</p>
+            <img src="https://via.placeholder.com/800x400" alt="Imagen del proyecto de robótica">
+            <!-- Link al código de la actividad -->
+            <div class="code-link">
+                <a href="https://github.com/miusuario/proyecto6">Ver Código en GitHub</a>
+            </div>
+        </section>
+        
+
+        <footer>
+            <p>&copy; 2024 - Tu Nombre | Escuela XYZ</p>
+        </footer>
+    </div>
+
+    <!-- Enlace a Bootstrap y Prism.js para funcionalidad -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+</body>
+</html>
+
+
